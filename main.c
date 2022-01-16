@@ -1,9 +1,7 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include "ft_printf.h"
-#include "src/write.h"
-#include "src/write_util.h"
-#include "src/ft_printf_utils.h"
+#include <stdlib.h>
+#include <limits.h>
+#include <stdio.h>
 
 int main(void)
 {
@@ -24,7 +22,7 @@ int main(void)
     // Manage any combination of the following flags: ’-0.’ and minimum field width with all conversions 
     // Manage all the following flags: ’# +’ (yes, one of them is a space)
     // int num = -2147483648;
-    // ft_putnbr(num);
+    // put_nbr(num);
 
 
     // int num = 2147483647;
@@ -32,9 +30,16 @@ int main(void)
     // libc_cc =  printf("libc_printf: %X\n", num);
     // ft_cc = ft_printf("ft_printf  : %X\n", num);
 
-    // libc_cc = printf("");
-    // ft_cc = ft_printf(NULL);
+    // ft_cc = ft_printf("libc: %p", &libc_cc);
+    // printf("\n");
+	// libc_cc = printf("  ft: %--+i", 35);
+	// ft_cc = ft_printf("%-102.91734s, %p, %d, %i, %u, %x, %X, %%", "test", &ft_cc, 123, 123, 123, 132);
+    libc_cc = printf("|%016.15d|\n", 16413);
+    // (void) ft_cc;
+    ft_cc = ft_printf("|%d|\n", 16413);
+	printf("\n");
 
     printf("char_counts:\n");
     printf("libc: %d\n  ft: %d\n", libc_cc, ft_cc);
+    // system("leaks a.out");
 }

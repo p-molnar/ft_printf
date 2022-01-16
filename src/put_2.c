@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_printf_utils.c                                  :+:    :+:            */
+/*   put_2.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pmolnar <pmolnar@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/01/12 16:43:18 by pmolnar       #+#    #+#                 */
-/*   Updated: 2022/01/15 14:03:38 by pmolnar       ########   odam.nl         */
+/*   Created: 2022/01/12 16:55:11 by pmolnar       #+#    #+#                 */
+/*   Updated: 2022/01/16 14:52:19 by pmolnar       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-
-int	index_of(const char str[], char c)
+size_t	ft_put_unsigned_nbr(unsigned int n)
 {
-	int	i;
+	size_t	printed_char_count;
 
-	i = 0;
-	while (str[i])
+	printed_char_count = 0;
+	if (n == 0)
+		printed_char_count += ft_put_char('0');
+	else if (n < 10)
+		printed_char_count += ft_put_char(n + '0');
+	else
 	{
-		if (str[i] == c)
-			return (i);
-		i++;
+		printed_char_count += ft_put_unsigned_nbr(n / 10);
+		printed_char_count += ft_put_unsigned_nbr(n % 10);
 	}
-	return (-1);
+	return (printed_char_count);
 }
