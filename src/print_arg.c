@@ -6,7 +6,7 @@
 /*   By: pmolnar <pmolnar@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/12 16:49:05 by pmolnar       #+#    #+#                 */
-/*   Updated: 2022/01/16 18:59:37 by pmolnar       ########   odam.nl         */
+/*   Updated: 2022/01/16 23:32:31 by pmolnar       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #define CHAR_SPACE ' '
+#define CHAR_ZERO '0'
 
 size_t	print_formatted_char(t_fmt_specs *fmt_specs, int c)
 {
@@ -84,9 +85,36 @@ size_t	print_formatted_address(t_fmt_specs *fmt_specs, unsigned long address)
 size_t	print_formatted_num(t_fmt_specs *fmt_specs, int n)
 {
 	size_t	printed_char_count;
+	size_t	nbr_len;
+	size_t	diff;
 
 	printed_char_count = 0;
-	(void) fmt_specs;
+	nbr_len = ft_intlen(n);
+
+	if ((*fmt_specs).width > nbr_len && (*fmt_specs).precision > nbr_len)
+	{
+		if ((*fmt_specs).width >= (*fmt_specs).precision)
+		{
+			diff = get_max((*fmt_specs).width - (*fmt_specs).precision, 0);
+			printed_char_count += iter_fn_n_times(ft_put_char, CHAR_SPACE, diff);	
+			diff = (*fmt_specs).precision - nbr_len;
+			printed_char_count += iter_fn_n_times(ft_put_char, CHAR_ZERO, diff);
+		}
+		else
+		{
+			
+			diff = (*fmt_specs).precision - nbr_len;
+			printed_char_count += iter_fn_n_times(ft_put_char, CHAR_ZERO, diff);
+		}
+	}
+	else if ((*fmt_specs).width > nbr_len || (*fmt_specs).precision > nbr_len)
+	{
+		if ((*fmt_specs).precision >= (*fmt_specs).width)
+			printed_char_count += iter_fn_n_times(ft_put_char, CHAR_ZERO, (*fmt_specs).precision - nbr_len);
+		else
+			printed_char_count += iter_fn_n_times(ft_put_char, CHAR_SPACE, (*fmt_specs).width - nbr_len);
+	}
+	
 	printed_char_count += ft_put_nbr(n);
 	return (printed_char_count);
 }
