@@ -6,12 +6,12 @@
 /*   By: pmolnar <pmolnar@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/12 16:43:18 by pmolnar       #+#    #+#                 */
-/*   Updated: 2022/01/16 22:47:28 by pmolnar       ########   odam.nl         */
+/*   Updated: 2022/01/17 11:32:30 by pmolnar       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
-
+#include <stdio.h>
 
 int	index_of(const char str[], char c)
 {
@@ -27,9 +27,23 @@ int	index_of(const char str[], char c)
 	return (-1);
 }
 
-int	get_max(int n1, int n2)
+int	get_max(size_t arg_count, ...)
 {
-	if (n1 >= n2)
-		return (n1);
-	return (n2);
+	size_t	i;
+	va_list	args;
+	int		arg;
+	int		max;
+
+	i = 0;
+	va_start(args, arg_count);
+	max = va_arg(args, int);
+	while (i < (arg_count - 1))
+	{
+		arg = va_arg(args, int);	
+		if (arg > max)
+			max = arg;
+		i++;
+	}	
+	va_end(args);
+	return (max);
 }

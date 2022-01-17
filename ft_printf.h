@@ -6,7 +6,7 @@
 /*   By: pmolnar <pmolnar@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/14 23:39:11 by pmolnar       #+#    #+#                 */
-/*   Updated: 2022/01/16 23:06:10 by pmolnar       ########   odam.nl         */
+/*   Updated: 2022/01/17 20:08:20 by pmolnar       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 # define HEX_PREFIX "0x"
 # define PRINTF_FLAGS "-+ #0"
 # define PRINTF_SPECIFIERS "cspdiuxX%"
+# define CHAR_SPACE ' '
+# define CHAR_ZERO '0'
+# define CHAR_PLUS '+'
+# define CHAR_MINUS '-'
 
 typedef struct	s_fmt_specs
 {
@@ -39,7 +43,7 @@ size_t	print_arg(t_fmt_specs *fmt_specs, va_list *args);
 
 // ft_printf_utils.h
 int		index_of(const char str[], char c);
-int		get_max(int n1, int n2);
+int		get_max(size_t arg_count, ...);
 
 // print_arg.c
 size_t	print_formatted_char(t_fmt_specs *fmt_specs, int c);
@@ -51,6 +55,9 @@ size_t	print_hex_num(unsigned long n, bool put_in_capital);
 
 // print_arg_utils.c
 size_t	iter_fn_n_times(size_t (*fn)(int c), int fn_arg, size_t n);
+size_t	print_width(t_fmt_specs *fmt_specs, int n, size_t nbr_len);
+size_t	print_precision(t_fmt_specs *fmt_specs, size_t nbr_len);
+size_t	print_prefix(t_fmt_specs *t_fmt_specs, int *n, size_t *nbr_len);
 
 // put.c
 size_t	ft_put_char(int	c);
