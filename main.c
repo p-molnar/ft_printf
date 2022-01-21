@@ -35,9 +35,9 @@ int main(void)
     // printf("\n");
 	// libc_cc = printf("  ft: %--+i", 35);
 	// ft_cc = ft_printf("%-102.9134s, %p, %d, %i, %u, %x, %X, %%", "test", &ft_cc, 123, 123, 123, 132);
-    libc_cc =      printf("|%#x|\n", &libc_cc);
+    libc_cc =      printf("| % 1s|\n", "2");
     // (void) ft_cc
-    ft_cc   =   ft_printf("|%#x|\n", &libc_cc);
+    ft_cc   =   ft_printf("| % 1s|\n", "2");
     
     // printf("%d\n", ft_abs((int) 2147483648));
     // ft_put_nbr((int)-0);
@@ -48,6 +48,6 @@ int main(void)
     // printf("main: %d", get_max(10, 17, 16, 15, 14, 13, 12, 18, 19, 34, 1));
 
     // printf("char_counts:\n");
-    // printf("libc: %d\n  ft: %d\n", libc_cc, ft_cc);
+    printf("libc: %d\n  ft: %d\n", libc_cc, ft_cc);
     // system("leaks a.out");
 }

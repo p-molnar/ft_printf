@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   put_2.c                                            :+:    :+:            */
+/*   populate_struct.h                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pmolnar <pmolnar@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/01/12 16:55:11 by pmolnar       #+#    #+#                 */
-/*   Updated: 2022/01/16 14:52:19 by pmolnar       ########   odam.nl         */
+/*   Created: 2022/01/15 14:03:50 by pmolnar       #+#    #+#                 */
+/*   Updated: 2022/01/21 19:59:22 by pmolnar       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
+#include "../libft/libft.h"
+#include "../ft_printf_cust_data_types"
+#include <stdbool.h>
 
-size_t	ft_put_unsigned_nbr(unsigned int n)
-{
-	size_t	printed_char_count;
-
-	printed_char_count = 0;
-	if (n == 0)
-		printed_char_count += ft_put_char('0');
-	else if (n < 10)
-		printed_char_count += ft_put_char(n + '0');
-	else
-	{
-		printed_char_count += ft_put_unsigned_nbr(n / 10);
-		printed_char_count += ft_put_unsigned_nbr(n % 10);
-	}
-	return (printed_char_count);
-}
+void	init_fmt_struct(t_fmt *fmt);
+size_t	populate_flags(const char *str, t_fmt *fmt);
+size_t	populate_num(const char *str, int *n);
+size_t	populate_specifier(const char *str, t_fmt *fmt_specs);

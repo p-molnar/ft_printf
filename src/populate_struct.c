@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   populate_specifier_struct.c                        :+:    :+:            */
+/*   populate_struct.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: pmolnar <pmolnar@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 14:03:50 by pmolnar       #+#    #+#                 */
-/*   Updated: 2022/01/21 13:51:26 by pmolnar       ########   odam.nl         */
+/*   Updated: 2022/01/21 19:39:05 by pmolnar       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 #include "../libft/libft.h"
+#include <stdbool.h>
 
-void	init_specifiers(t_fmt *fmt)
+void	init_fmt_struct(t_fmt *fmt)
 {
-	fmt->flags.minus = -1;
-	fmt->flags.plus = -1;
-	fmt->flags.space = -1;
-	fmt->flags.hash = -1;
-	fmt->flags.zero = -1;
+	fmt->flags.minus = false;
+	fmt->flags.plus = false;
+	fmt->flags.space = false;
+	fmt->flags.hash = false;
+	fmt->flags.zero = false;
 	fmt->width = -1;
 	fmt->precision = -1;
 	fmt->specifier = '\0';
@@ -35,15 +36,15 @@ size_t	populate_flags(const char *str, t_fmt *fmt)
 	{
 		flag = str[i];
 		if (flag == '-')
-			increment_flag_count(&fmt->flags.minus);
-		if (flag == '+')
-			increment_flag_count(&fmt->flags.plus);
-		if (flag == '0')
-			increment_flag_count(&fmt->flags.zero);
-		if (flag == '#')
-			increment_flag_count(&fmt->flags.hash);
-		if (flag == ' ')
-			increment_flag_count(&fmt->flags.space);
+			fmt->flags.minus = true;
+		else if (flag == '+')
+			fmt->flags.plus = true;
+		else if (flag == '0')
+			fmt->flags.zero = true;
+		else if (flag == '#')
+			fmt->flags.hash = true;
+		else if (flag == ' ')
+			fmt->flags.space = true;
 		i++;
 	}
 	return (i);
@@ -70,11 +71,4 @@ size_t	populate_specifier(const char *str, t_fmt *fmt_specs)
 	if (index_of(PRINTF_SPECIFIERS, specifier) >= 0)
 		(*fmt_specs).specifier = specifier;
 	return (1);
-}
-
-void	increment_flag_count(int *flag_count)
-{
-	if (*flag_count < 0)
-		*flag_count = 0;
-	*flag_count = *flag_count + 1;
 }

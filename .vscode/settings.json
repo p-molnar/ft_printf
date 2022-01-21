@@ -3,7 +3,8 @@
 		"stack": "c",
 		"stdbool.h": "c",
 		"chrono": "c",
-		"ios": "c"
+		"ios": "c",
+		"ft_printf_utils.h": "c"
 	},
 	"C_Cpp.intelliSenseEngineFallback": "Enabled"
 }

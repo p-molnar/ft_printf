@@ -1,10 +1,17 @@
-#include "../ft_printf.h"
-#include "../libft/libft.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   put.c                                              :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: pmolnar <pmolnar@student.codam.nl>           +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/01/21 13:56:20 by pmolnar       #+#    #+#                 */
+/*   Updated: 2022/01/21 19:14:28 by pmolnar       ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <limits.h>
+#include "put.h"
 #include <unistd.h>
-#include <stdbool.h>
-
 
 size_t	ft_put_char(int c)
 {
@@ -25,9 +32,7 @@ size_t	ft_put_nbr(long long n)
 	size_t	printed_char_count;
 
 	printed_char_count = 0;
-	if (n == INT_MIN)
-		printed_char_count += ft_put_str("2147483648", 10);
-	else if (n < 0)
+	if (n < 0)
 		printed_char_count += ft_put_nbr(-n);
 	else if (n == 0)
 		printed_char_count += ft_put_char('0');
@@ -38,27 +43,5 @@ size_t	ft_put_nbr(long long n)
 		printed_char_count += ft_put_nbr(n / 10);
 		printed_char_count += ft_put_nbr(n % 10);
 	}
-	return (printed_char_count);
-}
-
-size_t	ft_put_hex(unsigned long n, bool put_in_capital)
-{
-	size_t	printed_char_count;
-	char	*converted_num;
-
-	converted_num = convert_dec_to_hex(n);
-	if (put_in_capital == true)
-		converted_num = ft_strupr(converted_num);
-	printed_char_count = ft_put_str(converted_num, ft_strlen(converted_num));
-	return (printed_char_count);
-}
-
-size_t	ft_put_address(unsigned long address)
-{
-	size_t	printed_char_count;
-
-	printed_char_count = 0;
-	printed_char_count += ft_put_str(HEX_PREFIX_LOWER, ft_strlen(HEX_PREFIX_LOWER));
-	printed_char_count += ft_put_hex(address, false);
 	return (printed_char_count);
 }
