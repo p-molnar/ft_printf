@@ -6,7 +6,7 @@
 /*   By: pmolnar <pmolnar@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/12 16:51:35 by pmolnar       #+#    #+#                 */
-/*   Updated: 2022/01/17 18:23:48 by pmolnar       ########   odam.nl         */
+/*   Updated: 2022/01/21 13:00:04 by pmolnar       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ char	*convert_dec_to_hex(unsigned long n)
 	pos = 15;
 	char_set = "0123456789abcdef";
 	if (n == 0)
-		return ("0");
+	{
+		converted_num[0] = '0';
+		return (converted_num);
+	}
 	while (n)
 	{
 		remainder = n % 16;

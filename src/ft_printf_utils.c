@@ -6,7 +6,7 @@
 /*   By: pmolnar <pmolnar@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/12 16:43:18 by pmolnar       #+#    #+#                 */
-/*   Updated: 2022/01/17 11:32:30 by pmolnar       ########   odam.nl         */
+/*   Updated: 2022/01/21 11:45:55 by pmolnar       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,25 @@ int	get_max(size_t arg_count, ...)
 	max = va_arg(args, int);
 	while (i < (arg_count - 1))
 	{
-		arg = va_arg(args, int);	
+		arg = va_arg(args, int);
 		if (arg > max)
 			max = arg;
 		i++;
 	}	
 	va_end(args);
 	return (max);
+}
+
+size_t	get_num_len(long long n)
+{
+	size_t	len;
+
+	len = 1;
+	n /= 10;
+	while (n)
+	{
+		n /= 10;
+		len++;
+	}
+	return (len);
 }

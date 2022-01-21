@@ -6,7 +6,7 @@
 /*   By: pmolnar <pmolnar@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/12 16:24:29 by pmolnar       #+#    #+#                 */
-/*   Updated: 2022/01/16 18:59:01 by pmolnar       ########   odam.nl         */
+/*   Updated: 2022/01/21 13:47:01 by pmolnar       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int	ft_printf(const char *format, ...)
 	va_list		arg_list;
 	size_t		i;
 	size_t		index_offset;
-	size_t		printed_char_count;
-	t_fmt_specs	fmt_specifier;
+	size_t		char_count;
+	t_fmt		fmt;
 
-	printed_char_count = 0;
+	char_count = 0;
 	i = 0;
 	index_offset = 0;
 	va_start(arg_list, format);
@@ -32,63 +32,61 @@ int	ft_printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			init_specifiers(&fmt_specifier);
-			index_offset = parse_specifier(&format[i + 1], &fmt_specifier);	
-			printed_char_count += print_arg(&fmt_specifier, &arg_list);
+			init_specifiers(&fmt);
+			index_offset = parse_specifier(&format[i + 1], &fmt);
+			char_count += print_arg(&fmt, &arg_list);
 			i += index_offset;
 		}
 		else
-			printed_char_count += write(1, &format[i], 1);
+			char_count += write(1, &format[i], 1);
 		i++;
 	}
 	va_end(arg_list);
-	return (printed_char_count);
+	return (char_count);
 }
 
-size_t	parse_specifier(const char *format_str, t_fmt_specs *fmt_specifiers)
+size_t	parse_specifier(const char *format_str, t_fmt *fmt)
 {
 	size_t	i;
 
 	i = 0;
-	i += populate_flags(&format_str[i], fmt_specifiers);
-	i += populate_width(&format_str[i], fmt_specifiers);
+	i += populate_flags(&format_str[i], fmt);
+	i += populate_num(&format_str[i], &fmt->width);
+	// i += populate_width(&format_str[i], fmt);
 	if (format_str[i] == '.')
-		i++;	
-	i += populate_precision(&format_str[i], fmt_specifiers);
-	i += populate_specifier(&format_str[i], fmt_specifiers);
-
-	// printf("neg_sign: %zu\n", (*fmt_specifiers).flag_negative_sign);
-	// printf("pos_sign: %zu\n", (*fmt_specifiers).flag_positive_sign);
-	// printf("zero: %zu\n", (*fmt_specifiers).flag_zero);
-	// printf("hash: %zu\n", (*fmt_specifiers).flag_hash);
-	// printf("space: %zu\n", (*fmt_specifiers).flag_space);
-	// printf("width: %zu\n", (*fmt_specifiers).width);
-	// printf("precision: %zu\n", (*fmt_specifiers).precision);
-	// printf("specifier: %c\n", (*fmt_specifiers).specifier);
-	// printf("---\n");
+	{
+		fmt->precision = 0;
+		i++;
+	}
+	i += populate_num(&format_str[i], &fmt->precision);
+	// i += populate_precision(&format_str[i], fmt);
+	i += populate_specifier(&format_str[i], fmt);
+	// if ((*fmt).precision_point)
+	// {
+	// 	if ((*fmt).precision < 0)
+	// 		(*fmt).precision = 0;
+	// }
 	return (i);
 }
 
-size_t	print_arg(t_fmt_specs *fmt_specs, va_list *arg_list)
+size_t	print_arg(t_fmt *fmt, va_list *arg_list)
 {
-	size_t	printed_char_count;
+	size_t	char_count;
 
-	printed_char_count = 0;
-	if ((*fmt_specs).specifier == 'c')
-		printed_char_count += print_formatted_char(fmt_specs, va_arg(*arg_list, int));
-	if ((*fmt_specs).specifier == 's')
-		printed_char_count += print_formatted_str(fmt_specs, va_arg(*arg_list, char *));
-	if ((*fmt_specs).specifier == 'p')
-		printed_char_count += print_formatted_address(fmt_specs, va_arg(*arg_list, unsigned long));
-	if ((*fmt_specs).specifier == 'd' || (*fmt_specs).specifier == 'i')
-		printed_char_count += print_formatted_num(fmt_specs, va_arg(*arg_list, int));
-	// if ((*fmt_specs).specifier == 'u')
-	// 	printed_char_count += print_unsigned_num(va_arg(*arg_list, unsigned int));
-	// if ((*fmt_specs).specifier == 'x')
-	// 	printed_char_count += print_hex_num(va_arg(*arg_list, unsigned int), false);
-	// if ((*fmt_specs).specifier == 'X')
-	// 	printed_char_count += print_hex_num(va_arg(*arg_list, unsigned int), true);
-	// if ((*fmt_specs).specifier == '%')
-	// 	printed_char_count += print_formatted_char(fmt_specs, '%');
-	return (printed_char_count);
+	char_count = 0;
+	if (fmt->specifier == 'c')
+		char_count += print_char(fmt, va_arg(*arg_list, int));
+	else if (fmt->specifier == 's')
+		char_count += print_str(fmt, va_arg(*arg_list, char *));
+	else if (fmt->specifier == 'p')
+		char_count += print_hex_num(fmt, va_arg(*arg_list, unsigned long));
+	else if (fmt->specifier == 'd' || fmt->specifier == 'i')
+		char_count += print_num(fmt, va_arg(*arg_list, int));
+	else if (fmt->specifier == 'u')
+		char_count += print_num(fmt, va_arg(*arg_list, unsigned int));
+	else if (fmt->specifier == 'x' || fmt->specifier == 'X')
+		char_count += print_hex_num(fmt, va_arg(*arg_list, unsigned int));
+	else if (fmt->specifier == '%')
+		char_count += print_perc(fmt);
+	return (char_count);
 }

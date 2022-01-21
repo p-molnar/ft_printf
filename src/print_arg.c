@@ -6,7 +6,7 @@
 /*   By: pmolnar <pmolnar@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/17 15:37:33 by pmolnar       #+#    #+#                 */
-/*   Updated: 2022/01/17 20:23:34 by pmolnar       ########   odam.nl         */
+/*   Updated: 2022/01/21 13:52:44 by pmolnar       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,95 +15,124 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-size_t	print_formatted_char(t_fmt_specs *fmt_specs, int c)
+size_t	print_char(t_fmt *fmt, int c)
 {
-	size_t	printed_char_count;
-	size_t	repeat_count;
+	size_t		printed_char_count;
+	t_print_fmt	print_fmt;
 
+	print_fmt.arg_len = 1;
+	print_fmt.total_len = get_max(2, fmt->width, print_fmt.arg_len);
+	print_fmt.width = print_fmt.total_len - print_fmt.arg_len;
 	printed_char_count = 0;
-	if ((*fmt_specs).width > 1)
-	{
-		repeat_count = (*fmt_specs).width - 1;
-		if ((*fmt_specs).flag_negative_sign)
-		{
-			printed_char_count += ft_put_char(c);
-			printed_char_count += iter_fn_n_times(&ft_put_char, CHAR_SPACE, repeat_count);
-		}
-		else
-		{
-			printed_char_count += iter_fn_n_times(&ft_put_char, CHAR_SPACE, repeat_count);
-			printed_char_count += ft_put_char(c);
-		}
-	}
-	else
-		printed_char_count += ft_put_char(c);
+	if (fmt->flags.minus == -1)
+		printed_char_count += add_padding(print_fmt.width);
+	printed_char_count += ft_put_char(c);
+	if (fmt->flags.minus != -1)
+		printed_char_count += add_padding(print_fmt.width);
 	return (printed_char_count);
 }
 
-size_t	print_formatted_str(t_fmt_specs *fmt_specs, char *str)
+size_t	print_str(t_fmt *fmt, char *str)
 {
-	size_t	printed_char_count;
-	size_t	repeat_count;
+	size_t		printed_char_count;
+	t_print_fmt	print_fmt;
 
+	printed_char_count = 0;
 	if (!str)
-		return (ft_put_str("(null)"));
-	printed_char_count = 0;
-	if ((*fmt_specs).width > ft_strlen(str))
-	{
-		repeat_count = (*fmt_specs).width - ft_strlen(str);
-		if ((*fmt_specs).flag_negative_sign)
-		{
-			printed_char_count += ft_put_str(str);
-			printed_char_count += iter_fn_n_times(&ft_put_char, CHAR_SPACE, repeat_count);
-		}
-		else
-		{
-			printed_char_count += iter_fn_n_times(&ft_put_char, CHAR_SPACE, repeat_count);
-			printed_char_count += ft_put_str(str);
-		}
-	}
-	else
-		printed_char_count += ft_put_str(str);
+		return (print_str(fmt, "(null)"));
+	print_fmt.arg_len = ft_strlen(str);
+	if (fmt->specifier == 's' && fmt->precision != (-1) \
+		&& fmt->precision < (int) print_fmt.arg_len)
+		print_fmt.arg_len = fmt->precision;
+	print_fmt.total_len = get_max(2, fmt->width, print_fmt.arg_len);
+	print_fmt.width = get_max(2, print_fmt.total_len - print_fmt.arg_len, 0);
+	if (fmt->flags.minus == -1)
+		printed_char_count += add_padding(print_fmt.width);
+	printed_char_count += add_prefix(fmt, 0);
+	printed_char_count += ft_put_str(str, print_fmt.arg_len);
+	if (fmt->flags.minus != -1)
+		printed_char_count += add_padding(print_fmt.width);
 	return (printed_char_count);
 }
 
-size_t	print_formatted_address(t_fmt_specs *fmt_specs, unsigned long address)
+size_t	print_address(t_fmt *fmt, unsigned long address)
 {
-	char 	*converted_address;
+	char	*converted_address;
 	size_t	printed_char_count;
 
 	printed_char_count = 0;
 	converted_address = convert_dec_to_hex(address);
-	converted_address = ft_strjoin(HEX_PREFIX, converted_address);
+	converted_address = ft_strjoin(HEX_PREFIX_LOWER, converted_address);
 	if (!converted_address)
 		return (0);
-	printed_char_count += print_formatted_str(fmt_specs, converted_address);
+	printed_char_count += print_str(fmt, converted_address);
 	free(converted_address);
 	return (printed_char_count);
 }
 
-size_t	print_formatted_num(t_fmt_specs *fmt_specs, int n)
+size_t	print_num(t_fmt *fmt, long long n)
 {
-	size_t	printed_char_count;
-	size_t	nbr_len;
+	size_t		printed_char_count;
+	t_print_fmt	p_fmt;
 
 	printed_char_count = 0;
-	nbr_len = ft_intlen(n);
-	// if (n < 0)
-	// 	nbr_len++;
-	if ((*fmt_specs).flag_negative_sign)
-	{
-		printed_char_count += print_prefix(fmt_specs, &n, &nbr_len);
-		printed_char_count += print_precision(fmt_specs, nbr_len);
+	p_fmt.arg_len = get_num_len(n);
+	p_fmt.total_len = get_max(3, fmt->width, fmt->precision, p_fmt.arg_len);
+	p_fmt.precision = calc_precision(fmt, n, p_fmt);
+	p_fmt.width = calc_width(fmt, n, p_fmt);
+	if (fmt->flags.minus == -1)
+		printed_char_count += add_padding(p_fmt.width);
+	printed_char_count += add_prefix(fmt, n);
+	printed_char_count += add_precision(p_fmt.precision);
+	if (n != 0 || fmt->precision != 0)
 		printed_char_count += ft_put_nbr(n);
-		printed_char_count += print_width(fmt_specs, n, nbr_len);
-	}
-	else
-	{
-		printed_char_count += print_width(fmt_specs, n, nbr_len);
-		printed_char_count += print_prefix(fmt_specs, &n, &nbr_len);
-		printed_char_count += print_precision(fmt_specs, nbr_len);
-		printed_char_count += ft_put_nbr(n);
-	}	
+	if (fmt->flags.minus != -1)
+		printed_char_count += add_padding(p_fmt.width);
+	return (printed_char_count);
+}
+
+size_t	print_hex_num(t_fmt *fmt, long long n)
+{
+	size_t		printed_char_count;	
+	t_print_fmt	p_fmt;
+	char		*converted_num;
+
+	printed_char_count = 0;
+	converted_num = convert_dec_to_hex(n);
+	if (fmt->specifier == 'X')
+		converted_num = ft_strupr(converted_num);
+	p_fmt.arg_len = ft_strlen(converted_num);
+	p_fmt.total_len = get_max(3, fmt->width, fmt->precision, p_fmt.arg_len);
+	p_fmt.precision = calc_precision(fmt, n, p_fmt);
+	p_fmt.width = calc_width(fmt, n, p_fmt);
+	if (fmt->flags.minus == -1)
+		printed_char_count += add_padding(p_fmt.width);
+	printed_char_count += add_prefix(fmt, n);
+	printed_char_count += add_precision(p_fmt.precision);
+	if (n != 0 || fmt->precision != 0)
+		printed_char_count += ft_put_str(converted_num, p_fmt.arg_len);
+	if (fmt->flags.minus != -1)
+		printed_char_count += add_padding(p_fmt.width);
+	return (printed_char_count);
+}
+
+size_t	print_perc(t_fmt *fmt)
+{
+	size_t		printed_char_count;	
+	t_print_fmt	p_fmt;
+
+	printed_char_count = 0;
+	fmt->precision = 0;
+	p_fmt.precision = 0;
+	p_fmt.arg_len = 1;
+	p_fmt.total_len = get_max(3, fmt->width, fmt->precision, p_fmt.arg_len);
+	p_fmt.width = calc_width(fmt, 0, p_fmt);
+	if (fmt->flags.minus == -1 && fmt->flags.zero == -1)
+		printed_char_count += add_padding(p_fmt.width);
+	if (fmt->flags.minus == -1 && fmt->flags.zero != -1)
+		printed_char_count += add_precision(p_fmt.width);
+	printed_char_count += ft_put_char(CHAR_PERC);
+	if (fmt->flags.minus != -1)
+		printed_char_count += add_padding(p_fmt.width);
 	return (printed_char_count);
 }
