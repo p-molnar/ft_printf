@@ -1,5 +1,18 @@
-#include "../ft_printf.h"
-#include "parse.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   parse.c                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: pmolnar <pmolnar@student.codam.nl>           +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/01/23 15:51:35 by pmolnar       #+#    #+#                 */
+/*   Updated: 2022/01/23 15:51:37 by pmolnar       ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../headers/ft_printf.h"
+#include "../headers/ft_printf_parser.h"
+#include "../headers/ft_printf_struct_ops.h"
 #include <stdarg.h>
 
 size_t	parse_formatting(const char *format_str, t_fmt *fmt)

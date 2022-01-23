@@ -6,12 +6,13 @@
 /*   By: pmolnar <pmolnar@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/12 16:43:18 by pmolnar       #+#    #+#                 */
-/*   Updated: 2022/01/21 19:21:27 by pmolnar       ########   odam.nl         */
+/*   Updated: 2022/01/23 15:52:14 by pmolnar       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
-#include <stdio.h>
+#include "../headers/ft_printf_arg_formatter.h"
+#include "../libft/libft.h"
+#include <stdarg.h>
 
 int	index_of(const char str[], char c)
 {

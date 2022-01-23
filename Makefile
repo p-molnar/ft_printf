@@ -1,8 +1,13 @@
 NAME := libftprintf.a
-SRC =	ft_printf.c src/ft_printf_utils.c \
-		src/print_arg.c src/put.c src/put_2.c src/write_utils.c \
-		src/populate_specifier_struct.c src/print_arg_utils.c
-
+SRC  := ft_printf.c	\
+		src/print_formatted_arg.c	\
+		src/formatting.c	\
+		src/parse.c	\
+		src/parse.c	\
+		src/populate_struct.c	\
+		src/put.c	\
+		utils/ft_printf_formatting_utils.c	\
+		utils/ft_printf_utils.c	
 CC = gcc
 CFLAGS ?= -Wall -Wextra -Werror
 

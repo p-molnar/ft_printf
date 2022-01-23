@@ -6,20 +6,13 @@
 /*   By: pmolnar <pmolnar@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/12 16:24:29 by pmolnar       #+#    #+#                 */
-/*   Updated: 2022/01/21 20:01:34 by pmolnar       ########   odam.nl         */
+/*   Updated: 2022/01/23 16:42:01 by pmolnar       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "libft/libft.h"
-#include <stdarg.h>
-#include <unistd.h>
-#include <stdio.h>
-
-#include "ft_printf_utils.h"
-#include "ft_printf_cust_data_types.h"
-
-#include "src/parse.h"
+#include "headers/ft_printf.h"
+#include "headers/ft_printf_struct_ops.h"
+#include "headers/ft_printf_arg_printer.h"
 
 int	ft_printf(const char *format, ...)
 {
@@ -43,7 +36,7 @@ int	ft_printf(const char *format, ...)
 			i += index_offset;
 		}
 		else
-			char_count += ft_printf("%c");
+			char_count += ft_printf("%c", format[i]);
 		i++;
 	}
 	va_end(args);
