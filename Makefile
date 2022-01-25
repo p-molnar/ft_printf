@@ -6,18 +6,18 @@
 #    By: pmolnar <pmolnar@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/25 17:30:10 by pmolnar       #+#    #+#                  #
-#    Updated: 2022/01/25 17:30:11 by pmolnar       ########   odam.nl          #
+#    Updated: 2022/01/25 17:35:50 by pmolnar       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		:=	libftprintf.a 
-SRC  		:=	ft_printf.c	\
-				src/print_formatted_arg.c	\
-				src/formatting.c	\
-				src/parse.c	\
-				src/parse.c	\
-				src/populate_struct.c	\
-				src/put.c	\
+SRC  		:=	ft_printf.c							\
+				src/print_formatted_arg.c			\
+				src/formatting.c					\
+				src/parse.c							\
+				src/parse.c							\
+				src/populate_struct.c				\
+				src/put.c							\
 				utils/ft_printf_formatting_utils.c	\
 				utils/ft_printf_utils.c	
 
