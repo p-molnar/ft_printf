@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   ft_printf_cust_data_types.h                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: pmolnar <pmolnar@student.codam.nl>           +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/01/25 16:59:08 by pmolnar       #+#    #+#                 */
+/*   Updated: 2022/01/25 16:59:09 by pmolnar       ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_PRINTF_CUST_DATA_TYPES_H
 # define FT_PRINTF_CUST_DATA_TYPES_H
 # include <stddef.h>

@@ -1,5 +1,17 @@
-#ifndef PRINTF_ARG_PRINTER_H
-# define PRINTF_ARG_PRINTER_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   ft_printf_arg_printer.h                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: pmolnar <pmolnar@student.codam.nl>           +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/01/25 16:56:18 by pmolnar       #+#    #+#                 */
+/*   Updated: 2022/01/25 17:01:35 by pmolnar       ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef FT_PRINTF_ARG_PRINTER_H
+# define FT_PRINTF_ARG_PRINTER_H
 # include "ft_printf_cust_data_types.h"
 
 size_t	print_char(t_fmt *fmt, int c);

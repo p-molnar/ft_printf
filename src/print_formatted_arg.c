@@ -6,7 +6,7 @@
 /*   By: pmolnar <pmolnar@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/25 16:43:46 by pmolnar       #+#    #+#                 */
-/*   Updated: 2022/01/25 16:43:48 by pmolnar       ########   odam.nl         */
+/*   Updated: 2022/01/25 16:54:44 by pmolnar       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "../headers/ft_printf_cust_consts.h"
 #include "../headers/ft_printf_arg_formatter.h"
 #include "../headers/ft_printf_utils.h"
-#include "../headers/put.h"
+#include "../headers/ft_printf_puts.h"
 
 #include <stdio.h>
 

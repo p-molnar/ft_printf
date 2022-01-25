@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   ft_printf_arg_formatter.h                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: pmolnar <pmolnar@student.codam.nl>           +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/01/25 16:56:01 by pmolnar       #+#    #+#                 */
+/*   Updated: 2022/01/25 16:56:02 by pmolnar       ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_PRINTF_ARG_FORMATTER_H
 # define FT_PRINTF_ARG_FORMATTER_H
 # include "ft_printf_cust_data_types.h"

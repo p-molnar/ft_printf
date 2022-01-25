@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         ::::::::             #
+#    Makefile                                           :+:    :+:             #
+#                                                      +:+                     #
+#    By: pmolnar <pmolnar@student.codam.nl>           +#+                      #
+#                                                    +#+                       #
+#    Created: 2022/01/25 17:30:10 by pmolnar       #+#    #+#                  #
+#    Updated: 2022/01/25 17:30:11 by pmolnar       ########   odam.nl          #
+#                                                                              #
+# **************************************************************************** #
+
 NAME 		:=	libftprintf.a 
 SRC  		:=	ft_printf.c	\
 				src/print_formatted_arg.c	\
@@ -15,7 +27,7 @@ LIBFT_DIR 	?=	libft
 LIBFT		?=	libft.a
 
 CC 			=	gcc
-CFLAGS 		?=	-Wall -Wextra -Werror -I headers
+CFLAGS 		?=	-Wall -Wextra -Werror -I $(HEADER_DIR)
 
 OBJ = $(SRC:.c=.o)
 
