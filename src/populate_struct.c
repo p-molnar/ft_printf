@@ -6,15 +6,15 @@
 /*   By: pmolnar <pmolnar@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/15 14:03:50 by pmolnar       #+#    #+#                 */
-/*   Updated: 2022/01/23 15:51:49 by pmolnar       ########   odam.nl         */
+/*   Updated: 2022/01/25 17:47:54 by pmolnar       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
-#include "../headers/ft_printf_struct_ops.h"
-#include "../headers/ft_printf_cust_data_types.h"
-#include "../headers/ft_printf_cust_consts.h"
-#include "../headers/ft_printf_utils.h"
+#include "ft_printf_struct_ops.h"
+#include "ft_printf_cust_data_types.h"
+#include "ft_printf_cust_consts.h"
+#include "ft_printf_utils.h"
 #include <stdbool.h>
 
 void	init_fmt_struct(t_fmt *fmt)

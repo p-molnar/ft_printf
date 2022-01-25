@@ -6,11 +6,11 @@
 /*   By: pmolnar <pmolnar@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/21 13:56:20 by pmolnar       #+#    #+#                 */
-/*   Updated: 2022/01/25 16:55:38 by pmolnar       ########   odam.nl         */
+/*   Updated: 2022/01/25 17:47:54 by pmolnar       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/ft_printf_puts.h"
+#include "ft_printf_puts.h"
 #include <unistd.h>
 
 size_t	ft_put_char(int c)

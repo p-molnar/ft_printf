@@ -6,11 +6,11 @@
 /*   By: pmolnar <pmolnar@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/12 16:43:18 by pmolnar       #+#    #+#                 */
-/*   Updated: 2022/01/25 14:01:25 by pmolnar       ########   odam.nl         */
+/*   Updated: 2022/01/25 17:47:54 by pmolnar       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/ft_printf_arg_formatter.h"
+#include "ft_printf_arg_formatter.h"
 #include "../libft/libft.h"
 #include <stdarg.h>
 

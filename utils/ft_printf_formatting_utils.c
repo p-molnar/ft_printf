@@ -6,13 +6,13 @@
 /*   By: pmolnar <pmolnar@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 19:37:00 by pmolnar       #+#    #+#                 */
-/*   Updated: 2022/01/25 16:45:04 by pmolnar       ########   odam.nl         */
+/*   Updated: 2022/01/25 17:47:54 by pmolnar       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/ft_printf_cust_data_types.h"
-#include "../headers/ft_printf_cust_consts.h"
-#include "../headers/ft_printf_utils.h"
+#include "ft_printf_cust_data_types.h"
+#include "ft_printf_cust_consts.h"
+#include "ft_printf_utils.h"
 #include "../libft/libft.h"
 
 size_t	get_prefix_len(t_fmt *fmt, long long n)
