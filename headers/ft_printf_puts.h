@@ -1,5 +1,5 @@
-#ifndef PUT_H
-# define PUT_H
+#ifndef FT_PRINTF_PUTS_H
+# define FT_PRINTF_PUTS_H
 # include <stddef.h>
 
 size_t	ft_put_char(int c);

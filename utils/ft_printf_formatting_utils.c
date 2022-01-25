@@ -6,7 +6,7 @@
 /*   By: pmolnar <pmolnar@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 19:37:00 by pmolnar       #+#    #+#                 */
-/*   Updated: 2022/01/25 14:41:24 by pmolnar       ########   odam.nl         */
+/*   Updated: 2022/01/25 16:45:04 by pmolnar       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 size_t	get_prefix_len(t_fmt *fmt, long long n)
 {
-	size_t len;
+	size_t	len;
 
 	len = 0;
 	len += fmt->flags.plus;
