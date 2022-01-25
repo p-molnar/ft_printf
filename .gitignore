@@ -1,5 +1,9 @@
 main.c
-*/*.o
 .DS_Store
+ft_printf_tester
+printfTester
+libft
+*.a
+*/*.o
 *.out
 *.pdf

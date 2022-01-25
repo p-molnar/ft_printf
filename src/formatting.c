@@ -6,14 +6,14 @@
 /*   By: pmolnar <pmolnar@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/22 12:39:14 by pmolnar       #+#    #+#                 */
-/*   Updated: 2022/01/23 15:47:56 by pmolnar       ########   odam.nl         */
+/*   Updated: 2022/01/25 11:32:26 by pmolnar       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/ft_printf_arg_formatter.h"
-#include "../headers/ft_printf_cust_data_types.h"
-#include "../headers/ft_printf_cust_consts.h"
-#include "../headers/put.h"
+#include "ft_printf_arg_formatter.h"
+#include "ft_printf_cust_data_types.h"
+#include "ft_printf_cust_consts.h"
+#include "put.h"
 
 size_t	add_width(size_t n)
 {
