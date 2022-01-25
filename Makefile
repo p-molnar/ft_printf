@@ -21,20 +21,13 @@ OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJ)
+$(NAME): $(OBJ)
+		make $(LIBFT) -C $(LIBFT_DIR)
 		cp $(LIBFT_DIR)/$(LIBFT) .
 		mv $(LIBFT) $(NAME)
 		ar rcs $(NAME) $(OBJ)
 
-$(LIBFT): 
-		@if test -d "$(LIBFT_DIR)"; then \
-		echo "Updating libft..."; git -C $(LIBFT_DIR) pull; else \
-		git clone https://github.com/p-molnar/libft.git $(LIBFT_DIR); \
-		fi
-		make $(LIBFT) -C $(LIBFT_DIR)
-
-
- %.o: %.c
+%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 bonus: all
@@ -45,6 +38,6 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-re: fclean all 
+re: fclean all
 
-.PHONY: all bonus clean fclean re
+.PHONY: all bonus clean fclean re norm

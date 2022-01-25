@@ -6,7 +6,7 @@
 /*   By: pmolnar <pmolnar@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/12 16:24:29 by pmolnar       #+#    #+#                 */
-/*   Updated: 2022/01/25 11:42:56 by pmolnar       ########   odam.nl         */
+/*   Updated: 2022/01/25 13:19:09 by pmolnar       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,6 @@ size_t	print_arg(t_fmt *fmt, va_list *arg_list)
 	else if (fmt->specifier == 'x' || fmt->specifier == 'X')
 		char_count += print_hex_num(fmt, va_arg(*arg_list, unsigned int));
 	else if (fmt->specifier == '%')
-		char_count += print_char(fmt, '%');
+		char_count += print_perc(fmt);
 	return (char_count);
 }

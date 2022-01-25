@@ -2,8 +2,8 @@ main.c
 .DS_Store
 ft_printf_tester
 printfTester
-libft
 *.a
+*.o
 */*.o
 *.out
 *.pdf
