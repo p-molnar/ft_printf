@@ -6,13 +6,12 @@
 /*   By: pmolnar <pmolnar@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/20 19:37:00 by pmolnar       #+#    #+#                 */
-/*   Updated: 2022/01/26 11:32:13 by pmolnar       ########   odam.nl         */
+/*   Updated: 2022/01/26 13:10:48 by pmolnar       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "ft_printf.h"
 #include "../libft/libft.h"
-#include <stdio.h>
 
 size_t	calc_precision(t_fmt *fmt, long long n, t_print_fmt p_fmt)
 {

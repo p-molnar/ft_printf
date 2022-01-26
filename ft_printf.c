@@ -6,13 +6,14 @@
 /*   By: pmolnar <pmolnar@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/01/12 16:24:29 by pmolnar       #+#    #+#                 */
-/*   Updated: 2022/01/25 13:19:09 by pmolnar       ########   odam.nl         */
+/*   Updated: 2022/01/26 13:00:41 by pmolnar       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "headers/ft_printf.h"
-#include "headers/ft_printf_struct_ops.h"
-#include "headers/ft_printf_arg_printer.h"
+#include "ft_printf.h"
+#include "ft_printf_struct_ops.h"
+#include "ft_printf_arg_printer.h"
+#include "ft_printf_cust_consts.h"
 
 int	ft_printf(const char *format, ...)
 {
@@ -26,9 +27,9 @@ int	ft_printf(const char *format, ...)
 	i = 0;
 	index_offset = 0;
 	va_start(args, format);
-	while (format[i] != '\0')
+	while (format[i])
 	{
-		if (format[i] == '%')
+		if (format[i] == CHAR_PERC)
 		{
 			init_fmt_struct(&fmt);
 			index_offset = parse_formatting(&format[i + 1], &fmt);
