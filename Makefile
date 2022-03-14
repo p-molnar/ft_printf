@@ -48,6 +48,7 @@ clean:
 	rm -f $(OBJ)
 
 fclean: clean
+	make fclean --directory=libft
 	rm -f $(NAME)
 
 re: fclean all
