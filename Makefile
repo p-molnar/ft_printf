@@ -6,7 +6,7 @@
 #    By: pmolnar <pmolnar@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/25 17:30:10 by pmolnar       #+#    #+#                  #
-#    Updated: 2022/01/26 13:09:49 by pmolnar       ########   odam.nl          #
+#    Updated: 2022/03/14 13:44:51 by pmolnar       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,10 +45,10 @@ $(NAME): $(OBJ)
 bonus: all
 
 clean:
+	make fclean	--directory=libft
 	rm -f $(OBJ)
 
 fclean: clean
-	make fclean --directory=libft
 	rm -f $(NAME)
 
 re: fclean all
