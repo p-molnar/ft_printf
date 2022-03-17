@@ -6,10 +6,11 @@
 #    By: pmolnar <marvin@codam.nl>                    +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/11/04 17:46:44 by pmolnar       #+#    #+#                  #
-#    Updated: 2021/11/09 15:45:34 by pmolnar       ########   odam.nl          #
+#    Updated: 2022/03/17 11:03:29 by pmolnar       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
+NAME = libft.a
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 
@@ -44,31 +45,36 @@ BONUS_SRC	=	ft_lstnew_bonus.c			ft_lstadd_front_bonus.c	\
 				ft_lstclear_bonus.c			ft_lstiter_bonus.c		\
 				ft_lstmap_bonus.c
 
-SRC = $(PART1_SRC) $(PART2_SRC) $(UTIL_SRC)
-OBJ = $(SRC:.c=.o)
-B_OBJ = $(BONUS_SRC:.c=.o)
+SRC 		=	$(PART1_SRC) $(PART2_SRC) $(UTIL_SRC)
+OBJ 		=	$(SRC:.c=.o)
+B_OBJ 		=	$(BONUS_SRC:.c=.o)
 
-NAME = libft.a
+RED		=	\033[0;31m
+GREEN	=	\033[0;32m
+YELLOW	=	\033[1;33m
+DEF		=	\033[0m
 
 all: $(NAME)
 
 $(NAME): $(OBJ) 
 	ar rcs $(NAME) $(OBJ)
+	@echo "$(GREEN)Object files are successfully linked in$(DEF)"
+	@echo "$(GREEN)$(NAME) was sucessfully made\n$(DEF)"
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $^ -o $@
 
 bonus:
 	@make OBJ="$(B_OBJ)" all
 
 clean:
 	rm -f $(OBJ) $(B_OBJ)
-
+	@echo "$(GREEN)Object files successfully deleted\n$(DEF)"
 
 fclean: clean
 	rm -f $(NAME)
+	@echo "$(GREEN)Executable file(s) sucessfully deleted\n$(DEF)"
 
 re: fclean all
 
 .PHONY: all clean fclean re bonus
-
