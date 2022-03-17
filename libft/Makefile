@@ -6,7 +6,7 @@
 #    By: pmolnar <marvin@codam.nl>                    +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/11/04 17:46:44 by pmolnar       #+#    #+#                  #
-#    Updated: 2022/03/17 11:03:29 by pmolnar       ########   odam.nl          #
+#    Updated: 2022/03/17 11:08:13 by pmolnar       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,6 @@ all: $(NAME)
 
 $(NAME): $(OBJ) 
 	ar rcs $(NAME) $(OBJ)
-	@echo "$(GREEN)Object files are successfully linked in$(DEF)"
 	@echo "$(GREEN)$(NAME) was sucessfully made\n$(DEF)"
 
 %.o: %.c
