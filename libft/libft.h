@@ -6,13 +6,19 @@
 /*   By: pmolnar <pmolnar@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/04 19:05:41 by pmolnar       #+#    #+#                 */
-/*   Updated: 2021/11/08 16:21:40 by pmolnar       ########   odam.nl         */
+/*   Updated: 2022/03/07 13:29:43 by pmolnar       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+
 # include <stddef.h>
+
+# define CHAR_PLUS '+'
+# define CHAR_MINUS '-'
+# define CHAR_ZERO '0'
+# define CHAR_DOT '.'
 
 // struct prototype for linked list
 typedef struct s_list
@@ -21,16 +27,18 @@ typedef struct s_list
 	struct s_list	*next;
 }				t_list;
 
-//	Utility functions
+// Additional functions
 int				ft_isupper(int c);
 int				ft_islower(int c);
 int				ft_isspace(int c);
-unsigned int	ft_count(char const *s, char c);
-char			ft_dtoa(int d);
-int				ft_abs(int n);
 int				ft_isnegative(int n);
-unsigned int	ft_intlen(int n);
+int				ft_abs(int i);
 char			ft_dtoa(int d);
+int				ft_atod(char c);
+double			ft_atof(const char *str);
+size_t			ft_count(char *s, char c);
+size_t			ft_get_num_len(long long n);
+char			*ft_reverse_str(char *str);
 
 // 	Part 1 - Libc functions
 int				ft_isalpha(int c);

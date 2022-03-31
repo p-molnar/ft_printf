@@ -3,21 +3,26 @@
 #                                                         ::::::::             #
 #    Makefile                                           :+:    :+:             #
 #                                                      +:+                     #
-#    By: pmolnar <marvin@codam.nl>                    +#+                      #
+#    By: pmolnar <pmolnar@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/11/04 17:46:44 by pmolnar       #+#    #+#                  #
-#    Updated: 2022/03/17 11:08:13 by pmolnar       ########   odam.nl          #
+#    Updated: 2022/03/31 11:59:55 by pmolnar       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
-CC = gcc
-CFLAGS = -Wall -Werror -Wextra
+GREEN		=	\033[0;32m
+YELLOW		=	\033[1;33m
+DEF			=	\033[0m
+
+CC			= 	gcc
+CFLAGS		= 	-Wall -Werror -Wextra
 
 UTIL_SRC	=	ft_isupper.c		ft_islower.c		\
 				ft_isspace.c		ft_count.c			\
 				ft_dtoa.c			ft_abs.c			\
-				ft_isnegative.c		ft_intlen.c
+				ft_isnegative.c		ft_get_num_len.c	\
+				ft_reverse_str.c	ft_atod.c			\
+				ft_atof.c			ft_int_max.c		\
 
 PART1_SRC	= 	ft_isalpha.c		ft_isdigit.c		\
 				ft_isalnum.c		ft_isascii.c		\
@@ -45,34 +50,34 @@ BONUS_SRC	=	ft_lstnew_bonus.c			ft_lstadd_front_bonus.c	\
 				ft_lstclear_bonus.c			ft_lstiter_bonus.c		\
 				ft_lstmap_bonus.c
 
-SRC 		=	$(PART1_SRC) $(PART2_SRC) $(UTIL_SRC)
-OBJ 		=	$(SRC:.c=.o)
-B_OBJ 		=	$(BONUS_SRC:.c=.o)
+SRC 		=	$(addprefix libc/, $(PART1_SRC)) \
+				$(addprefix libc/, $(PART2_SRC))	\
+				$(addprefix additional/, $(UTIL_SRC))
 
-RED		=	\033[0;31m
-GREEN	=	\033[0;32m
-YELLOW	=	\033[1;33m
-DEF		=	\033[0m
+OBJ 		= 	$(SRC:.c=.o)
+
+B_OBJ 		= 	$(addprefix linked_list/, $(BONUS_SRC:.c=.o))
+
+NAME 		= 	libft.a
 
 all: $(NAME)
 
 $(NAME): $(OBJ) 
 	ar rcs $(NAME) $(OBJ)
-	@echo "$(GREEN)$(NAME) was sucessfully made\n$(DEF)"
-
+	@echo "$(GREEN)$(NAME) successfully compiled\n$(DEF)"
 %.o: %.c
-	$(CC) $(CFLAGS) -c $^ -o $@
+	$(CC) $(CFLAGS) -I ./ -c $^ -o $@
 
 bonus:
 	@make OBJ="$(B_OBJ)" all
 
 clean:
 	rm -f $(OBJ) $(B_OBJ)
-	@echo "$(GREEN)Object files successfully deleted\n$(DEF)"
+	@echo "$(GREEN)Object files are deleted\n$(DEF)"
 
 fclean: clean
 	rm -f $(NAME)
-	@echo "$(GREEN)Executable file(s) sucessfully deleted\n$(DEF)"
+	@echo "$(GREEN)$(NAME) is deleted\n$(DEF)"
 
 re: fclean all
 
