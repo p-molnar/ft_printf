@@ -6,7 +6,7 @@
 #    By: pmolnar <pmolnar@student.codam.nl>           +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/01/25 17:30:10 by pmolnar       #+#    #+#                  #
-#    Updated: 2022/03/17 11:08:18 by pmolnar       ########   odam.nl          #
+#    Updated: 2023/09/24 12:09:02 by pmolnar       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,12 +38,15 @@ DEF		=	\033[0m
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(LIBFT) $(OBJ)
 	make $(LIBFT) -C $(LIBFT_DIR)
 	cp $(LIBFT_DIR)/$(LIBFT) .
 	mv $(LIBFT) $(NAME)
 	ar rcs $(NAME) $(OBJ)
 	@echo "$(GREEN)$(NAME) was sucessfully made\n$(DEF)"
+
+$(LIBFT):
+	git submodule update --init --recursive
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
